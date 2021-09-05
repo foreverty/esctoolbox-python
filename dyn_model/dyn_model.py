@@ -18,7 +18,7 @@ mags = [10, 10, 30, 45, 45, 50, 50, 50]     # A123
 doHyst = 1          # 1 "find M, M0 and G params" or 0 "make hys params 0" 
 
 # read model OCV file, previously computed by runProcessOCV
-modelocv = ModelOcv.load(Path(f'./modelocv.json'))
+modelocv = ModelOcv.load(Path(f'../ocv_model/modelocv.json'))
 
 # initialize array to store battery cell data
 data = np.zeros(len(mags), dtype=object)
@@ -30,16 +30,16 @@ for idx, temp in enumerate(temps):
     mag = mags[idx]
     if temp < 0:
         tempfmt = f'{abs(temp):02}'
-        files = [Path(f'./dyn_data/{cellID}_DYN_{mag}_N{tempfmt}_s1.csv'),
-                 Path(f'./dyn_data/{cellID}_DYN_{mag}_N{tempfmt}_s2.csv'),
-                 Path(f'./dyn_data/{cellID}_DYN_{mag}_N{tempfmt}_s3.csv')]
+        files = [Path(f'../dyn_data/{cellID}_DYN_{mag}_N{tempfmt}_s1.csv'),
+                 Path(f'../dyn_data/{cellID}_DYN_{mag}_N{tempfmt}_s2.csv'),
+                 Path(f'../dyn_data/{cellID}_DYN_{mag}_N{tempfmt}_s3.csv')]
         data[idx] = DataModel(temp, files)
         print(*files, sep='\n')
     else:
         tempfmt = f'{abs(temp):02}'
-        files = [Path(f'./dyn_data/{cellID}_DYN_{mag}_P{tempfmt}_s1.csv'),
-                 Path(f'./dyn_data/{cellID}_DYN_{mag}_P{tempfmt}_s2.csv'),
-                 Path(f'./dyn_data/{cellID}_DYN_{mag}_P{tempfmt}_s3.csv')]
+        files = [Path(f'../dyn_data/{cellID}_DYN_{mag}_P{tempfmt}_s1.csv'),
+                 Path(f'../dyn_data/{cellID}_DYN_{mag}_P{tempfmt}_s2.csv'),
+                 Path(f'../dyn_data/{cellID}_DYN_{mag}_P{tempfmt}_s3.csv')]
         data[idx] = DataModel(temp, files)
         print(*files, sep='\n')
 
